@@ -3,6 +3,8 @@
   { 
     "lazy": "*",
     "dirty" : "*",
-    "string" : "*"
+    "string" : "*",
+    "underscore" : "*",
+    "express" : "3.x"
   }
 }

@@ -15,8 +15,8 @@ new lazy(fs.createReadStream('./ritarit.txt'))
          } else {
 	   var person = {};
 	   var values = line.toString().split(',');
-	   person.firstName = S(values[0]).trim().s;
-	   person.lastName = S(values[1]).trim().s;
+	   person.firstName = S(values[1]).trim().s;
+	   person.lastName = S(values[0]).trim().s;
 	   person.job = S(values[2]).trim().s;
 	   person.municipality = S(values[3]).trim().s;
 	   person.honor = honor;
