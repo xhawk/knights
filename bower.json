@@ -13,6 +13,8 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "leaflet": "~0.7.1"
+    "leaflet": "~0.7.1",
+    "underscore": "~1.5.2",
+    "jquery": "~2.0.3"
   }
 }

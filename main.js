@@ -17,7 +17,9 @@ getMunicipalities = function() {
   return function(req, res) {
     db.forEach(function(key, val) {
       mun.muns.push(val.municipality);
-      mun.muns = _.uniq(mun.muns);
+      mun.muns = _.uniq(mun.muns, function(item,key,a){
+          return item.name;
+      })
     });
     res.send(mun);
   }
