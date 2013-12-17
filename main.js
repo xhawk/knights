@@ -3,6 +3,7 @@ var dirty = require('dirty');
     express = require('express');
     app   = express();
     _     = require('underscore');
+    path  = require('path');
 var mun   = {};
     mun.muns = [];
 
@@ -37,6 +38,10 @@ getPeople = function() {
     res.send(peopleInMun);
   }
 }
+
+// serve static pages
+app.use(express.static(path.join(__dirname, 'public')));
+app.use("/lib", express.static(path.join(__dirname, 'bower_components')));
 
 // Routes
 app.get('/muns', getMunicipalities());

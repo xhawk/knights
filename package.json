@@ -1,4 +1,6 @@
-{ 
+{
+  "name": "knights",
+  "version": "0.1.0", 
   "dependencies" :
   { 
     "lazy": "*",
@@ -7,6 +9,8 @@
     "underscore" : "*",
     "express" : "3.x",
     "request-json": "*",
-    "line-by-line": "*"
+    "line-by-line": "*",
+    "sync": "*",
+    "readline": "*"
   }
 }
