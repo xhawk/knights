@@ -3,19 +3,11 @@ var dirty = require('dirty');
     express = require('express');
     app   = express();
     _     = require('underscore');
+    path  = require('path');
 var mun   = {};
     mun.muns = [];
 
 db.on('load', function(){
-  /*var peopleInMun = {};
-  peopleInMun.municipality = mun[1];
-  peopleInMun.people = [];
-
-  db.forEach(function(key, val){
-    if (val.municipality === mun[1]) {
-      peopleInMun.people.push(val.firstName + " " + val.lastName);
-    }
-  });*/
   console.log('database loaded');
   app.listen(9000);
   console.log('App ready!');
@@ -46,6 +38,10 @@ getPeople = function() {
     res.send(peopleInMun);
   }
 }
+
+// serve static pages
+app.use(express.static(path.join(__dirname, 'public')));
+app.use("/lib", express.static(path.join(__dirname, 'bower_components')));
 
 // Routes
 app.get('/muns', getMunicipalities());
