@@ -5,6 +5,8 @@
     "dirty" : "*",
     "string" : "*",
     "underscore" : "*",
-    "express" : "3.x"
+    "express" : "3.x",
+    "request-json": "*",
+    "line-by-line": "*"
   }
 }

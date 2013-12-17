@@ -1,5 +1,5 @@
 var dirty = require('dirty');
-    db    = dirty('ritari.db');
+    db    = dirty('ritari.db1');
     express = require('express');
     app   = express();
     _     = require('underscore');
@@ -7,15 +7,6 @@ var mun   = {};
     mun.muns = [];
 
 db.on('load', function(){
-  /*var peopleInMun = {};
-  peopleInMun.municipality = mun[1];
-  peopleInMun.people = [];
-
-  db.forEach(function(key, val){
-    if (val.municipality === mun[1]) {
-      peopleInMun.people.push(val.firstName + " " + val.lastName);
-    }
-  });*/
   console.log('database loaded');
   app.listen(9000);
   console.log('App ready!');
