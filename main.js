@@ -18,7 +18,7 @@ getMunicipalities = function() {
     db.forEach(function(key, val) {
       mun.muns.push(val.municipality);
       mun.muns = _.uniq(mun.muns, function(item,key,a){
-          return item.name;
+        return item.name;
       })
     });
     res.send(mun);
@@ -30,11 +30,20 @@ getPeople = function() {
     var peopleInMun = {};
     var mun = req.param('mun');
     peopleInMun.municipality = req.param('mun');
-    peopleInMun.people = [];
+    peopleInMun.honors = [];
 
     db.forEach(function(key, val){
-      if (val.municipality === mun) {
-        peopleInMun.people.push(val.firstName + " " + val.lastName);
+      if (val.municipality.name === mun) {
+        peopleInMun.honors.push({name: val.honor, people: []});
+        peopleInMun.honors = _.uniq(peopleInMun.honors, function(item, key, a){
+          return item.name;
+        });
+        
+        _.each(peopleInMun.honors, function(element, index, list) {
+          if (val.honor === element.name) {
+            element.people.push(val.firstName + " " + val.lastName);
+          }
+        });
       }
     });
     res.send(peopleInMun);
