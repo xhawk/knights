@@ -46,8 +46,24 @@ getPeople = function() {
         });
       }
     });
+    _.each(peopleInMun.honors, function(element, index, list) {
+      // sort by name
+      element.people.sort(function(a, b) {
+        if(a < b) return -1;
+        if(a > b) return 1;
+        return 0;
+      });
+    });
     res.send(peopleInMun);
   }
+}
+
+var sortstring = function(a, b) {
+    a = a.toLowerCase();
+    b = b.toLowerCase();
+    if (a < b) return 1;
+    if (a > b) return -1;
+    return 0;
 }
 
 // serve static pages
