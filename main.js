@@ -16,10 +16,12 @@ db.on('load', function(){
 getMunicipalities = function() {
   return function(req, res) {
     db.forEach(function(key, val) {
-      mun.muns.push(val.municipality);
-      mun.muns = _.uniq(mun.muns, function(item,key,a){
-        return item.name;
-      })
+      if (typeof val.municipality !== 'undefined') {
+        mun.muns.push(val.municipality);
+        mun.muns = _.uniq(mun.muns, function(item,key,a){
+          return item.name;
+        })
+      }
     });
     res.send(mun);
   }
@@ -33,7 +35,7 @@ getPeople = function() {
     peopleInMun.honors = [];
 
     db.forEach(function(key, val){
-      if (val.municipality.name === mun) {
+      if (typeof val.municipality !== 'undefined' && val.municipality.name === mun) {
         peopleInMun.honors.push({name: val.honor, people: []});
         peopleInMun.honors = _.uniq(peopleInMun.honors, function(item, key, a){
           return item.name;
@@ -41,7 +43,7 @@ getPeople = function() {
         
         _.each(peopleInMun.honors, function(element, index, list) {
           if (val.honor === element.name) {
-            element.people.push(val.firstName + " " + val.lastName);
+            element.people.push({'firstName': val.firstName, 'lastName': val.lastName, 'job': val.job});
           }
         });
       }
@@ -49,21 +51,13 @@ getPeople = function() {
     _.each(peopleInMun.honors, function(element, index, list) {
       // sort by name
       element.people.sort(function(a, b) {
-        if(a < b) return -1;
-        if(a > b) return 1;
+        if(a.lastName < b.lastName) return -1;
+        if(a.lastName > b.lastName) return 1;
         return 0;
       });
     });
     res.send(peopleInMun);
   }
-}
-
-var sortstring = function(a, b) {
-    a = a.toLowerCase();
-    b = b.toLowerCase();
-    if (a < b) return 1;
-    if (a > b) return -1;
-    return 0;
 }
 
 // serve static pages

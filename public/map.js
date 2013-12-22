@@ -19,7 +19,7 @@ function populatePopupContent(e) {
 		_.each(peopleInMun.honors, function(element, index, list) {
 			var content = "<br/><strong>" + element.name.split('/')[0] + "</strong>";
 			_.each(element.people, function(person, i, l) {
-				content = content + "<br/>" + person;
+				content = content + "<br/>" + person.lastName + ", " + person.firstName + ", " + person.job;
 			});
 			$('.leaflet-popup-content').append(content);
 		});
