@@ -16,12 +16,25 @@ map.on('popupopen', populatePopupContent);
 function populatePopupContent(e) {
 	var place = e.popup._content;
 	$.get("/muns/" + place, function(peopleInMun) {
-		_.each(peopleInMun.honors, function(element, index, list) {
-			var content = "<br/><strong>" + element.name.split('/')[0] + "</strong>";
-			_.each(element.people, function(person, i, l) {
-				content = content + "<br/>" + person.lastName + ", " + person.firstName + ", " + person.job;
-			});
-			$('.leaflet-popup-content').append(content);
-		});
-	});
-}
+		_.each(peopleInMun.honors, createPopupContent);
+  })
+};
+  
+function createPopupContent(element, index, list) {                                          
+  var content = "<br/><strong>" + element.name.split('/')[0] + "(" + element.people.length  + ")</strong>";                                                                                                   
+  content = content + "<ul ";                   
+  if (element.people.length > 10) {
+    content = content + "style='display: none'";
+  };                                                                                                  
+  content = content + ">";
+  _.each(element.people, function(person, i, l) {
+    content = content + "<li>" + person.lastName + ", " + person.firstName + ", " + person.job + "</li>";
+  });
+  content = content + "</ul>";
+  $('.leaflet-popup-content').append(content);
+};
+
+$(document).on("click", "strong", function(e){
+  $(this).next().toggle(); 
+});
+

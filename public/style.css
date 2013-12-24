@@ -4,3 +4,12 @@ html, body {
 body {
 	margin: 0;
 }
+
+li {
+  list-style-type: none;
+}
+
+.leaflet-popup-content ul {
+  padding-left: 0;
+  margin: 0;
+}
